@@ -10,9 +10,14 @@ import {
   House,
   CheckCircle2,
 } from "lucide-react";
+
 import "./App.css";
 
 const LOGO = "/images/mylynkr-logo.png";
+
+/* ----------------------------------------
+   BRAND
+---------------------------------------- */
 
 function Brand({ light = false }) {
   return (
@@ -32,24 +37,34 @@ function Brand({ light = false }) {
           flexShrink: 0,
         }}
       />
+
       <span className="brand-name">mylynkr</span>
     </a>
   );
 }
+
+/* ----------------------------------------
+   HEADER
+---------------------------------------- */
 
 function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const update = () => setScrolled(window.scrollY > 30);
+    const update = () => {
+      setScrolled(window.scrollY > 30);
+    };
+
     update();
 
     window.addEventListener("scroll", update, {
       passive: true,
     });
 
-    return () => window.removeEventListener("scroll", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+    };
   }, []);
 
   return (
@@ -63,12 +78,20 @@ function Header() {
           className={`nav ${open ? "nav-open" : ""}`}
           aria-label="Main navigation"
         >
-          <a href="#vision" onClick={() => setOpen(false)}>
+          <a
+            href="#vision"
+            onClick={() => setOpen(false)}
+          >
             Our Vision
           </a>
-          <a href="#approach" onClick={() => setOpen(false)}>
+
+          <a
+            href="#approach"
+            onClick={() => setOpen(false)}
+          >
             Our Approach
           </a>
+
           <a
             className="mobile-join"
             href="#early-access"
@@ -97,6 +120,10 @@ function Header() {
   );
 }
 
+/* ----------------------------------------
+   GARAGE EXPERIENCE
+---------------------------------------- */
+
 function GarageExperience() {
   return (
     <div className="garage-experience">
@@ -105,6 +132,7 @@ function GarageExperience() {
       <div className="garage-scene">
         <div className="garage-scene-top">
           <span>MYLYNKR / CONNECTED SPACES</span>
+
           <span className="garage-scene-live">
             <span />
             CONCEPT 001
@@ -117,6 +145,7 @@ function GarageExperience() {
 
           <div className="garage-building">
             <div className="garage-roof" />
+
             <div className="garage-wall">
               <div className="garage-door-frame">
                 <div className="garage-door">
@@ -134,6 +163,7 @@ function GarageExperience() {
           <div className="garage-connection">
             <span className="garage-connection-ring ring-outer" />
             <span className="garage-connection-ring ring-inner" />
+
             <span className="garage-connection-core">
               <Wifi size={19} strokeWidth={1.7} />
             </span>
@@ -150,10 +180,12 @@ function GarageExperience() {
         <div className="garage-status-icon">
           <House size={19} strokeWidth={1.6} />
         </div>
+
         <div className="garage-status-copy">
           <span>CONNECTED LIVING</span>
           <strong>It starts at home.</strong>
         </div>
+
         <span className="garage-status-indicator" />
       </div>
 
@@ -164,6 +196,10 @@ function GarageExperience() {
     </div>
   );
 }
+
+/* ----------------------------------------
+   HERO
+---------------------------------------- */
 
 function Hero() {
   return (
@@ -189,10 +225,14 @@ function Hero() {
         </p>
 
         <div className="hero-actions">
-          <a className="button button-primary" href="#early-access">
+          <a
+            className="button button-primary"
+            href="#early-access"
+          >
             Join the Waitlist
             <ArrowUpRight size={17} />
           </a>
+
           <a className="text-link" href="#vision">
             Explore Our Vision
             <ArrowRight size={16} />
@@ -204,6 +244,7 @@ function Hero() {
 
       <div className="hero-bottom">
         <span>THE NEXT CHAPTER OF CONNECTED LIVING</span>
+
         <span className="hero-bottom-right">
           01 / THE BEGINNING
         </span>
@@ -211,6 +252,10 @@ function Hero() {
     </section>
   );
 }
+
+/* ----------------------------------------
+   VISION
+---------------------------------------- */
 
 function Vision() {
   return (
@@ -221,7 +266,9 @@ function Vision() {
       </div>
 
       <div className="vision-content">
-        <div className="eyebrow">A DIFFERENT WAY FORWARD</div>
+        <div className="eyebrow">
+          A DIFFERENT WAY FORWARD
+        </div>
 
         <h2>
           Technology should
@@ -244,6 +291,10 @@ function Vision() {
   );
 }
 
+/* ----------------------------------------
+   APPROACH
+---------------------------------------- */
+
 function Approach() {
   return (
     <section className="approach" id="approach">
@@ -257,6 +308,7 @@ function Approach() {
           <div className="eyebrow">
             BUILT AROUND WHAT MATTERS
           </div>
+
           <h2>
             Less complexity.
             <br />
@@ -266,8 +318,12 @@ function Approach() {
 
         <div className="principles">
           <div className="principle">
-            <span className="principle-number">01 /</span>
+            <span className="principle-number">
+              01 /
+            </span>
+
             <h3>Intentional by design.</h3>
+
             <p>
               Every interaction should have a purpose.
               Nothing unnecessary. Nothing in the way.
@@ -275,8 +331,12 @@ function Approach() {
           </div>
 
           <div className="principle">
-            <span className="principle-number">02 /</span>
+            <span className="principle-number">
+              02 /
+            </span>
+
             <h3>Made for real life.</h3>
+
             <p>
               Technology should adapt to the way people
               live, not the other way around.
@@ -284,8 +344,12 @@ function Approach() {
           </div>
 
           <div className="principle">
-            <span className="principle-number">03 /</span>
+            <span className="principle-number">
+              03 /
+            </span>
+
             <h3>Connected thinking.</h3>
+
             <p>
               We're starting with one everyday space,
               with a vision that extends far beyond it.
@@ -297,20 +361,26 @@ function Approach() {
   );
 }
 
+/* ----------------------------------------
+   EARLY ACCESS / SUPABASE WAITLIST
+---------------------------------------- */
+
 function EarlyAccess() {
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
+  const [showPreferences, setShowPreferences] = useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     if (status === "submitting") return;
 
+    // Honeypot field for automated spam submissions.
     if (website) {
       setStatus("success");
-      setMessage("You're on the list.");
+      setMessage("Thanks for your interest.");
       return;
     }
 
@@ -327,12 +397,15 @@ function EarlyAccess() {
 
     if (!supabaseUrl || !supabaseKey) {
       setStatus("error");
-      setMessage("Registration isn't configured yet. Please try again later.");
+      setMessage(
+        "Registration isn't configured yet. Please try again later."
+      );
       return;
     }
 
     setStatus("submitting");
     setMessage("");
+    setShowPreferences(false);
 
     try {
       const response = await fetch(
@@ -352,27 +425,51 @@ function EarlyAccess() {
       );
 
       if (response.status === 409) {
-        setStatus("success");
-        setMessage("You're already on the list. Stay tuned.");
+        setStatus("existing");
+        setShowPreferences(true);
+        setMessage(
+          "This email may already be registered. If you've unsubscribed, you can securely rejoin through Email Preferences."
+        );
         return;
       }
 
       if (!response.ok) {
-        throw new Error(`Signup failed: ${response.status}`);
+        throw new Error(
+          `Signup failed: ${response.status}`
+        );
       }
 
       setStatus("success");
-      setMessage("You're on the list. We'll be in touch.");
+      setMessage(
+        "You're on the list. We'll be in touch."
+      );
       setEmail("");
     } catch (error) {
-      console.error("Waitlist submission error:", error);
+      console.error(
+        "Waitlist submission error:",
+        error
+      );
+
       setStatus("error");
-      setMessage("We couldn't submit your email. Please try again.");
+      setMessage(
+        "We couldn't submit your email. Please try again."
+      );
     }
   }
 
+  function resetForm() {
+    setStatus("idle");
+    setMessage("");
+    setShowPreferences(false);
+    setEmail("");
+    setWebsite("");
+  }
+
   return (
-    <section className="early-access" id="early-access">
+    <section
+      className="early-access"
+      id="early-access"
+    >
       <div className="early-access-glow" />
 
       <div className="early-access-inner">
@@ -393,24 +490,69 @@ function EarlyAccess() {
           opportunities.
         </p>
 
-        {status === "success" ? (
+        {status === "success" || status === "existing" ? (
           <div
             role="status"
             style={{
               display: "flex",
+              flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              gap: 12,
-              padding: "22px 16px",
+              gap: 16,
+              padding: "24px 16px",
               color: "#e6edf2",
+              textAlign: "center",
             }}
           >
-            <CheckCircle2 size={24} />
-            <span>{message}</span>
+            <CheckCircle2 size={25} />
+
+            <span
+              style={{
+                maxWidth: 480,
+                lineHeight: 1.8,
+              }}
+            >
+              {message}
+            </span>
+
+            {showPreferences && (
+              <a
+                href="/email-preferences"
+                className="button button-primary"
+                style={{
+                  marginTop: 8,
+                  textDecoration: "none",
+                }}
+              >
+                Manage Email Preferences
+                <ArrowUpRight size={17} />
+              </a>
+            )}
+
+            <button
+              type="button"
+              onClick={resetForm}
+              style={{
+                background: "transparent",
+                border: "none",
+                color: "#aab3bd",
+                fontSize: 12,
+                cursor: "pointer",
+                padding: 10,
+              }}
+            >
+              Use another email
+            </button>
           </div>
         ) : (
-          <form className="signup-form" onSubmit={handleSubmit}>
-            <label className="sr-only" htmlFor="signup-email">
+          <form
+            className="signup-form"
+            onSubmit={handleSubmit}
+          >
+            <label
+              className="sr-only"
+              htmlFor="signup-email"
+            >
               Email address
             </label>
 
@@ -421,7 +563,9 @@ function EarlyAccess() {
               placeholder="Enter your email address"
               autoComplete="email"
               value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={(event) =>
+                setEmail(event.target.value)
+              }
               required
               maxLength={254}
               disabled={status === "submitting"}
@@ -431,7 +575,9 @@ function EarlyAccess() {
               type="text"
               name="website"
               value={website}
-              onChange={(event) => setWebsite(event.target.value)}
+              onChange={(event) =>
+                setWebsite(event.target.value)
+              }
               tabIndex={-1}
               autoComplete="off"
               aria-hidden="true"
@@ -446,9 +592,18 @@ function EarlyAccess() {
             <button
               type="submit"
               disabled={status === "submitting"}
-              style={{ cursor: "pointer", opacity: 1 }}
+              style={{
+                cursor:
+                  status === "submitting"
+                    ? "wait"
+                    : "pointer",
+                opacity: 1,
+              }}
             >
-              {status === "submitting" ? "Joining..." : "Join Waitlist"}
+              {status === "submitting"
+                ? "Joining..."
+                : "Join Waitlist"}
+
               <ArrowUpRight size={17} />
             </button>
           </form>
@@ -469,28 +624,100 @@ function EarlyAccess() {
 
         <span className="signup-note">
           By joining, you agree to receive MyLynkr
-          development and launch updates.
+          development and launch updates.{" "}
+          <a
+            href="/privacy"
+            style={{
+              color: "#c4cbd2",
+              textDecoration: "underline",
+              textUnderlineOffset: 3,
+            }}
+          >
+            Privacy Policy
+          </a>
+          {" · "}
+          <a
+            href="/terms"
+            style={{
+              color: "#c4cbd2",
+              textDecoration: "underline",
+              textUnderlineOffset: 3,
+            }}
+          >
+            Terms of Use
+          </a>
         </span>
       </div>
     </section>
   );
 }
 
+/* ----------------------------------------
+   FOOTER
+---------------------------------------- */
+
 function Footer() {
+  const footerLinks = [
+    {
+      label: "Privacy Policy",
+      href: "/privacy",
+    },
+    {
+      label: "Terms of Use",
+      href: "/terms",
+    },
+    {
+      label: "Email Preferences",
+      href: "/email-preferences",
+    },
+  ];
+
   return (
     <footer className="footer">
       <div className="footer-top">
         <Brand light />
+
         <p>Connecting what matters.</p>
       </div>
 
-      <div className="footer-bottom">
+      <div
+        className="footer-bottom"
+        style={{
+          flexWrap: "wrap",
+          rowGap: 20,
+        }}
+      >
         <span>
           © {new Date().getFullYear()} MyLynkr.
           All rights reserved.
         </span>
 
-        <span>THE FUTURE STARTS HERE.</span>
+        <nav
+          aria-label="Legal navigation"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            columnGap: 22,
+            rowGap: 12,
+          }}
+        >
+          {footerLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              style={{
+                color: "#aab3bd",
+                fontSize: 11,
+                textDecoration: "none",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
 
         <a href="mailto:hello@mylynkr.com">
           Get in Touch
@@ -501,24 +728,37 @@ function Footer() {
   );
 }
 
+/* ----------------------------------------
+   MAIN APPLICATION
+---------------------------------------- */
+
 export default function App() {
   useEffect(() => {
     const elements = document.querySelectorAll(
       ".vision-content, .approach-heading, .principle, .early-access-inner"
     );
 
-    if (!("IntersectionObserver" in window)) return;
+    if (!("IntersectionObserver" in window)) {
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
+            entry.target.classList.add(
+              "is-visible"
+            );
+
+            observer.unobserve(
+              entry.target
+            );
           }
         });
       },
-      { threshold: 0.12 }
+      {
+        threshold: 0.12,
+      }
     );
 
     elements.forEach((element) => {
@@ -532,12 +772,14 @@ export default function App() {
   return (
     <>
       <Header />
+
       <main>
         <Hero />
         <Vision />
         <Approach />
         <EarlyAccess />
       </main>
+
       <Footer />
     </>
   );
