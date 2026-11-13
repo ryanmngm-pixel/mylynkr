@@ -1,0 +1,16 @@
+
+:root {
+  font-family: "DM Sans", sans-serif;
+  background: #08090a;
+  color: #f4f4f2;
+}
+
+html, body, #root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow-x: hidden;
+}

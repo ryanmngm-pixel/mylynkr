@@ -1,0 +1,653 @@
+
+/* ==========================================
+   MYLYNKR — ACTIVATION EXPERIENCE
+   OBSIDIAN / LIQUID METAL
+========================================== */
+
+.mylynkr-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+
+  overflow: hidden;
+  isolation: isolate;
+
+  background: #080a0d;
+  color: #f3f5f7;
+
+  font-family: "DM Sans", sans-serif;
+
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ==========================================
+   BACKGROUND GRID
+========================================== */
+
+.loader-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(200, 220, 240, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(200, 220, 240, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 145px 145px;
+
+  -webkit-mask-image: radial-gradient(
+    ellipse,
+    black 5%,
+    transparent 80%
+  );
+
+  mask-image: radial-gradient(
+    ellipse,
+    black 5%,
+    transparent 80%
+  );
+
+  pointer-events: none;
+}
+
+/* ==========================================
+   ATMOSPHERIC LIGHTING
+========================================== */
+
+.loader-atmosphere {
+  position: absolute;
+  z-index: 0;
+
+  width: min(80vw, 900px);
+  aspect-ratio: 1;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(155, 190, 225, 0.16) 0%,
+    rgba(70, 110, 150, 0.065) 35%,
+    transparent 72%
+  );
+
+  filter: blur(35px);
+
+  animation:
+    mylynkr-atmosphere-breathe
+    6s ease-in-out infinite;
+
+  pointer-events: none;
+}
+
+/* ==========================================
+   HEADER AND FOOTER
+========================================== */
+
+.loader-top,
+.loader-bottom {
+  position: absolute;
+  z-index: 10;
+
+  left: 6%;
+  right: 6%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.loader-top {
+  top: 6%;
+}
+
+.loader-bottom {
+  bottom: 5%;
+
+  color: #838b96;
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+
+.loader-brand {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.075em;
+  line-height: 1;
+}
+
+.loader-top-right {
+  color: #838b96;
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+
+/* ==========================================
+   FULL-SCREEN PARTICLE FIELD
+========================================== */
+
+.loader-visual {
+  position: absolute;
+  z-index: 2;
+
+  width: 100vw;
+  height: 100vh;
+  aspect-ratio: auto;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  opacity: 1;
+
+  pointer-events: none;
+}
+
+.loader-visual canvas {
+  display: block;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  outline: none;
+}
+
+/* ==========================================
+   STATUS AND READY CONTENT
+========================================== */
+
+.loader-content {
+  position: absolute;
+  z-index: 12;
+
+  left: 50%;
+  bottom: 12%;
+
+  width: min(90%, 750px);
+
+  transform: translateX(-50%);
+
+  text-align: center;
+}
+
+.loader-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  color: #b6c0ca;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+}
+
+.loader-status-dot {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #e4edf7;
+
+  box-shadow:
+    0 0 15px rgba(215, 233, 255, 0.8);
+
+  animation:
+    mylynkr-status-pulse
+    1.5s ease-in-out infinite;
+}
+
+.loader-content p {
+  margin: 15px 0 0;
+
+  color: #969fa9;
+
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.loader-loading-content {
+  animation:
+    mylynkr-content-enter
+    0.6s ease both;
+}
+
+.loader-ready-content {
+  animation:
+    mylynkr-content-enter
+    0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.loader-ready-content h1 {
+  margin: 18px 0 0;
+
+  font-size: clamp(28px, 4.5vw, 62px);
+  font-weight: 800;
+  letter-spacing: -0.065em;
+  line-height: 1.05;
+}
+
+/* ==========================================
+   ENTER MYLYNKR BUTTON
+========================================== */
+
+.loader-enter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 45px;
+
+  margin-top: 30px;
+  padding: 17px 24px;
+
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 100px;
+
+  background: linear-gradient(
+    135deg,
+    #f6f8fa 0%,
+    #dce3e9 48%,
+    #b8c2cc 100%
+  );
+
+  color: #101419;
+
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+.loader-enter span {
+  font-size: 17px;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.loader-enter:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 45px rgba(200, 220, 240, 0.2),
+    0 0 25px rgba(200, 220, 240, 0.08);
+}
+
+.loader-enter:hover span {
+  transform: translate(2px, -2px);
+}
+
+.loader-enter:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.loader-enter:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 5px;
+}
+
+.loader-enter:disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ==========================================
+   CONNECTION ESTABLISHED
+========================================== */
+
+.loader-ready .loader-status-dot {
+  animation: none;
+
+  background: #f2f7fc;
+
+  box-shadow:
+    0 0 10px rgba(220, 240, 255, 0.65);
+}
+
+/* ==========================================
+   CINEMATIC WEBSITE REVEAL
+========================================== */
+
+/*
+   The existing React phase "burst" now
+   triggers a quiet cinematic transition.
+
+   No explosion.
+   No flash.
+   No shockwave.
+*/
+
+.loader-burst {
+  pointer-events: none;
+
+  animation:
+    mylynkr-overlay-reveal
+    1.75s cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+/* Fade out the text first */
+
+.loader-burst .loader-content {
+  animation:
+    mylynkr-content-exit
+    0.55s ease-in-out forwards;
+}
+
+.loader-burst .loader-top,
+.loader-burst .loader-bottom {
+  animation:
+    mylynkr-header-exit
+    0.75s ease-in-out forwards;
+}
+
+/* The signal gently recedes */
+
+.loader-burst .loader-visual {
+  animation:
+    mylynkr-signal-exit
+    1.5s cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+/* Ambient glow disappears */
+
+.loader-burst .loader-atmosphere {
+  animation:
+    mylynkr-atmosphere-exit
+    1.5s ease-in-out forwards;
+}
+
+/* Grid fades into the homepage */
+
+.loader-burst .loader-grid {
+  animation:
+    mylynkr-grid-exit
+    1.2s ease forwards;
+}
+
+/* Completely disable old explosion elements */
+
+.loader-shockwave,
+.loader-flash,
+.loader-burst .loader-shockwave,
+.loader-burst .loader-flash {
+  display: none !important;
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+/* ==========================================
+   KEYFRAME ANIMATIONS
+========================================== */
+
+@keyframes mylynkr-atmosphere-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform:
+      translate(-50%, -50%)
+      scale(0.95);
+  }
+
+  50% {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      scale(1.08);
+  }
+}
+
+@keyframes mylynkr-status-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes mylynkr-content-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mylynkr-content-exit {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px);
+  }
+}
+
+@keyframes mylynkr-header-exit {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes mylynkr-signal-exit {
+  0% {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+    filter: blur(0);
+  }
+
+  55% {
+    opacity: 0.9;
+    transform:
+      translate(-50%, -50%)
+      scale(0.96);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(0.82);
+    filter: blur(10px);
+  }
+}
+
+@keyframes mylynkr-atmosphere-exit {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes mylynkr-grid-exit {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes mylynkr-overlay-reveal {
+  0%,
+  25% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 1100px) {
+  .loader-top,
+  .loader-bottom {
+    left: 5%;
+    right: 5%;
+  }
+
+  .loader-content {
+    bottom: 11%;
+  }
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 700px) {
+  .loader-top,
+  .loader-bottom {
+    left: 7%;
+    right: 7%;
+  }
+
+  .loader-top {
+    top: 5%;
+  }
+
+  .loader-bottom {
+    bottom: 4%;
+    font-size: 9px;
+  }
+
+  .loader-top-right,
+  .loader-bottom span:last-child {
+    display: none;
+  }
+
+  .loader-brand {
+    font-size: 24px;
+  }
+
+  .loader-visual {
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+  }
+
+  .loader-atmosphere {
+    width: 110vw;
+    max-width: none;
+  }
+
+  .loader-content {
+    bottom: 13%;
+    width: 90%;
+  }
+
+  .loader-ready-content h1 {
+    font-size: clamp(30px, 8vw, 46px);
+  }
+
+  .loader-content p {
+    font-size: 14px;
+  }
+
+  .loader-status {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  }
+
+  .loader-enter {
+    margin-top: 26px;
+    padding: 16px 23px;
+    gap: 30px;
+  }
+}
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+@media (max-width: 390px) {
+  .loader-ready-content h1 {
+    font-size: 30px;
+  }
+
+  .loader-content {
+    bottom: 12%;
+  }
+
+  .loader-enter {
+    font-size: 12px;
+  }
+}
+
+/* ==========================================
+   ACCESSIBILITY
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .loader-atmosphere,
+  .loader-status-dot,
+  .loader-loading-content,
+  .loader-ready-content {
+    animation: none !important;
+  }
+
+  .loader-burst {
+    animation-duration: 0.15s !important;
+  }
+
+  .loader-burst .loader-content,
+  .loader-burst .loader-top,
+  .loader-burst .loader-bottom,
+  .loader-burst .loader-visual,
+  .loader-burst .loader-atmosphere,
+  .loader-burst .loader-grid {
+    animation-duration: 0.15s !important;
+  }
+}
