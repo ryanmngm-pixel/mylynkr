@@ -1,0 +1,78 @@
+
+/* MyLynkr Newsroom — Image Uploader */
+
+.news-admin .news-image-upload,
+.news-admin .news-upload,
+.news-admin .news-image-uploader {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+
+/* Keep uploaded images inside a compact preview. */
+.news-admin .news-image-upload img,
+.news-admin .news-upload img,
+.news-admin .news-image-uploader img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  max-height: 240px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+/* Match the premium dark dashboard controls. */
+.news-admin .news-image-upload button,
+.news-admin .news-upload button,
+.news-admin .news-image-uploader button {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 15px;
+  background: #1b242e;
+  color: #e9eff6;
+  border: 1px solid #354250;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+.news-admin .news-image-upload button:hover:not(:disabled),
+.news-admin .news-upload button:hover:not(:disabled),
+.news-admin .news-image-uploader button:hover:not(:disabled) {
+  background: #25313e;
+  border-color: #526477;
+}
+
+.news-admin .news-image-upload input[type="file"],
+.news-admin .news-upload input[type="file"],
+.news-admin .news-image-uploader input[type="file"] {
+  max-width: 100%;
+  color: #aab8c7;
+  font-size: 12px;
+}
+
+.news-admin .news-image-upload p,
+.news-admin .news-upload p,
+.news-admin .news-image-uploader p,
+.news-admin .news-image-upload small,
+.news-admin .news-upload small,
+.news-admin .news-image-uploader small {
+  color: #93a4b5;
+  font-size: 11px;
+  line-height: 1.6;
+}

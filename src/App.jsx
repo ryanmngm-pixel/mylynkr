@@ -5,13 +5,14 @@ import {
   ArrowRight,
   Menu,
   X,
-  Wifi,
-  ShieldCheck,
-  House,
   CheckCircle2,
 } from "lucide-react";
 
+import { LatestNews } from "./components/Newsroom.jsx";
+
 import "./App.css";
+import "./components/Newsroom.css";
+import "./components/NewsHero.css";
 
 const LOGO = "/images/mylynkr-logo.png";
 
@@ -23,7 +24,7 @@ function Brand({ light = false }) {
   return (
     <a
       className={`brand ${light ? "brand-light" : ""}`}
-      href="#top"
+      href="/#top"
       aria-label="MyLynkr home"
     >
       <img
@@ -67,6 +68,8 @@ function Header() {
     };
   }, []);
 
+  const closeMenu = () => setOpen(false);
+
   return (
     <header
       className={`header ${scrolled ? "header-scrolled" : ""}`}
@@ -78,24 +81,22 @@ function Header() {
           className={`nav ${open ? "nav-open" : ""}`}
           aria-label="Main navigation"
         >
-          <a
-            href="#vision"
-            onClick={() => setOpen(false)}
-          >
+          <a href="#vision" onClick={closeMenu}>
             Our Vision
           </a>
 
-          <a
-            href="#approach"
-            onClick={() => setOpen(false)}
-          >
+          <a href="#approach" onClick={closeMenu}>
             Our Approach
+          </a>
+
+          <a href="/news" onClick={closeMenu}>
+            Newsroom
           </a>
 
           <a
             className="mobile-join"
             href="#early-access"
-            onClick={() => setOpen(false)}
+            onClick={closeMenu}
           >
             Get Early Access
           </a>
@@ -121,89 +122,12 @@ function Header() {
 }
 
 /* ----------------------------------------
-   GARAGE EXPERIENCE
----------------------------------------- */
-
-function GarageExperience() {
-  return (
-    <div className="garage-experience">
-      <div className="garage-aura" />
-
-      <div className="garage-scene">
-        <div className="garage-scene-top">
-          <span>MYLYNKR / CONNECTED SPACES</span>
-
-          <span className="garage-scene-live">
-            <span />
-            CONCEPT 001
-          </span>
-        </div>
-
-        <div className="garage-art" aria-hidden="true">
-          <div className="garage-light garage-light-left" />
-          <div className="garage-light garage-light-right" />
-
-          <div className="garage-building">
-            <div className="garage-roof" />
-
-            <div className="garage-wall">
-              <div className="garage-door-frame">
-                <div className="garage-door">
-                  {Array.from({ length: 6 }, (_, i) => (
-                    <span key={i} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="garage-floor" />
-          <div className="garage-floor-light" />
-
-          <div className="garage-connection">
-            <span className="garage-connection-ring ring-outer" />
-            <span className="garage-connection-ring ring-inner" />
-
-            <span className="garage-connection-core">
-              <Wifi size={19} strokeWidth={1.7} />
-            </span>
-          </div>
-        </div>
-
-        <div className="garage-scene-bottom">
-          <span>THE EVERYDAY, REIMAGINED.</span>
-          <span>01 — 03</span>
-        </div>
-      </div>
-
-      <div className="garage-status-card">
-        <div className="garage-status-icon">
-          <House size={19} strokeWidth={1.6} />
-        </div>
-
-        <div className="garage-status-copy">
-          <span>CONNECTED LIVING</span>
-          <strong>It starts at home.</strong>
-        </div>
-
-        <span className="garage-status-indicator" />
-      </div>
-
-      <div className="garage-security-note">
-        <ShieldCheck size={14} />
-        <span>DESIGNED FOR EVERYDAY LIFE</span>
-      </div>
-    </div>
-  );
-}
-
-/* ----------------------------------------
-   HERO
+   HERO / LATEST NEWS
 ---------------------------------------- */
 
 function Hero() {
   return (
-    <section className="hero" id="top">
+    <section className="hero mylynkr-news-hero" id="top">
       <div className="hero-noise" />
       <div className="hero-grid" />
 
@@ -240,10 +164,14 @@ function Hero() {
         </div>
       </div>
 
-      <GarageExperience />
+      <div className="mylynkr-hero-news">
+        <LatestNews />
+      </div>
 
       <div className="hero-bottom">
-        <span>THE NEXT CHAPTER OF CONNECTED LIVING</span>
+        <span>
+          THE NEXT CHAPTER OF CONNECTED LIVING
+        </span>
 
         <span className="hero-bottom-right">
           01 / THE BEGINNING
@@ -362,7 +290,7 @@ function Approach() {
 }
 
 /* ----------------------------------------
-   EARLY ACCESS / SUPABASE WAITLIST
+   EARLY ACCESS / WAITLIST
 ---------------------------------------- */
 
 function EarlyAccess() {
@@ -370,14 +298,13 @@ function EarlyAccess() {
   const [website, setWebsite] = useState("");
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
-  const [showPreferences, setShowPreferences] = useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     if (status === "submitting") return;
 
-    // Honeypot field for automated spam submissions.
+    // Honeypot field for basic bot filtering.
     if (website) {
       setStatus("success");
       setMessage("Thanks for your interest.");
@@ -386,14 +313,19 @@ function EarlyAccess() {
 
     const normalizedEmail = email.trim().toLowerCase();
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+    if (
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)
+    ) {
       setStatus("error");
       setMessage("Please enter a valid email address.");
       return;
     }
 
-    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-    const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    const supabaseUrl =
+      import.meta.env.VITE_SUPABASE_URL;
+
+    const supabaseKey =
+      import.meta.env.VITE_SUPABASE_ANON_KEY;
 
     if (!supabaseUrl || !supabaseKey) {
       setStatus("error");
@@ -405,7 +337,6 @@ function EarlyAccess() {
 
     setStatus("submitting");
     setMessage("");
-    setShowPreferences(false);
 
     try {
       const response = await fetch(
@@ -426,9 +357,8 @@ function EarlyAccess() {
 
       if (response.status === 409) {
         setStatus("existing");
-        setShowPreferences(true);
         setMessage(
-          "This email may already be registered. If you've unsubscribed, you can securely rejoin through Email Preferences."
+          "This email may already be registered. To rejoin updates or change your subscription, visit Email Preferences."
         );
         return;
       }
@@ -458,12 +388,14 @@ function EarlyAccess() {
   }
 
   function resetForm() {
-    setStatus("idle");
-    setMessage("");
-    setShowPreferences(false);
     setEmail("");
     setWebsite("");
+    setStatus("idle");
+    setMessage("");
   }
+
+  const completed =
+    status === "success" || status === "existing";
 
   return (
     <section
@@ -490,13 +422,12 @@ function EarlyAccess() {
           opportunities.
         </p>
 
-        {status === "success" || status === "existing" ? (
+        {completed ? (
           <div
             role="status"
             style={{
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
               alignItems: "center",
               gap: 16,
               padding: "24px 16px",
@@ -515,7 +446,7 @@ function EarlyAccess() {
               {message}
             </span>
 
-            {showPreferences && (
+            {status === "existing" && (
               <a
                 href="/email-preferences"
                 className="button button-primary"
@@ -592,13 +523,6 @@ function EarlyAccess() {
             <button
               type="submit"
               disabled={status === "submitting"}
-              style={{
-                cursor:
-                  status === "submitting"
-                    ? "wait"
-                    : "pointer",
-                opacity: 1,
-              }}
             >
               {status === "submitting"
                 ? "Joining..."
@@ -625,25 +549,14 @@ function EarlyAccess() {
         <span className="signup-note">
           By joining, you agree to receive MyLynkr
           development and launch updates.{" "}
-          <a
-            href="/privacy"
-            style={{
-              color: "#c4cbd2",
-              textDecoration: "underline",
-              textUnderlineOffset: 3,
-            }}
-          >
+
+          <a href="/privacy">
             Privacy Policy
           </a>
+
           {" · "}
-          <a
-            href="/terms"
-            style={{
-              color: "#c4cbd2",
-              textDecoration: "underline",
-              textUnderlineOffset: 3,
-            }}
-          >
+
+          <a href="/terms">
             Terms of Use
           </a>
         </span>
@@ -658,6 +571,10 @@ function EarlyAccess() {
 
 function Footer() {
   const footerLinks = [
+    {
+      label: "Newsroom",
+      href: "/news",
+    },
     {
       label: "Privacy Policy",
       href: "/privacy",
@@ -693,7 +610,7 @@ function Footer() {
         </span>
 
         <nav
-          aria-label="Legal navigation"
+          aria-label="Footer navigation"
           style={{
             display: "flex",
             alignItems: "center",
@@ -729,7 +646,7 @@ function Footer() {
 }
 
 /* ----------------------------------------
-   MAIN APPLICATION
+   APPLICATION
 ---------------------------------------- */
 
 export default function App() {
@@ -746,13 +663,8 @@ export default function App() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add(
-              "is-visible"
-            );
-
-            observer.unobserve(
-              entry.target
-            );
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
           }
         });
       },
